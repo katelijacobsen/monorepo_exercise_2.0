@@ -1,12 +1,29 @@
 import type { NextConfig } from "next";
 
-const nextConfig : NextConfig = {
-  reactStrictMode: true,       // ← keep this from your config
+const nextConfig: NextConfig = {
+  
+  reactStrictMode: true,
   async rewrites() {
     return [
-      { source: "/:path*", destination: "http://localhost:80/:path*" } //use this port. Its says in Dockerfile where you run Flask
-    ]
-  }
-}
+      {
+        source: "/api/:path*",
+        destination: "http://flask-app:80/api/:path*"  // ← service name from docker-compose.yml
+      }
+    ];
+  },
+  turbopack: {
+    // ...
+  },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      config.watchOptions = {
+        poll: 500,
+        aggregateTimeout: 300,
+      };
+    }
+    return config;
+  },
+  
+};
 
 module.exports = nextConfig;
