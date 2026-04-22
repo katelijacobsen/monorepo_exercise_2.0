@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
       {
         source: "/api/:path*",
         destination: "http://flask-app:80/api/:path*"  // ← service name from docker-compose.yml
-      }
+      } // Add pythonanywhere url 
     ];
   },
   turbopack: {

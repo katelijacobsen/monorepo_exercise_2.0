@@ -1,0 +1,1 @@
+Exchange the inside of the dockerfile the commands with 'next'
